@@ -32,13 +32,16 @@ public class Driver {
 		 */
 		
 		Debug debug = new Debug();
-		debug.set_debug_value(Integer.parseInt(args[3]));
+		debug.set_debug_value(Integer.parseInt(args[4]));
+		
+		System.out.println("DEBUG_VALUE set to : "+ debug.get_debug_value());
 		
 		/***
 		 * Step 1: Open the dataFile for reading check change 
 		 */
 		
-		String file_name = "/Users/sachin/Documents/workspace/dTunesStore/Test.txt";
+		String file_name = args[0]+".txt";
+		
 		new PopulateWorker(); // create a new thread
 		new PopulateWorker(); 
 		
