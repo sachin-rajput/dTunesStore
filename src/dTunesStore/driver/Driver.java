@@ -16,7 +16,7 @@ import dTunesStore.dataStore.SearchWorker;
 
 /**
  * @author1 Sachin Rajput
- * @author1 Amol Mankar
+ * @author2 Amol Mankar
  *
  */
 public class Driver {
