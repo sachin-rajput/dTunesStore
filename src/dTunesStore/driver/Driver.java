@@ -5,11 +5,9 @@ package dTunesStore.driver;
 
 import java.io.*;
 
-import com.sun.corba.se.spi.orb.ParserData;
-import com.sun.xml.internal.rngom.parse.Parseable;
-
 import dTunesStore.util.Results;
 import dTunesStore.util.Debug;
+import dTunesStore.util.Helper;
 import dTunesStore.dataStore.PopulateWorker;
 import dTunesStore.dataStore.SearchWorker;
 
@@ -62,6 +60,10 @@ public class Driver {
 				// Print the content on the console
 				System.out.println(strLine);
 			}
+			
+			Helper helper = new Helper();
+			System.out.println("The number of lines : " + helper.countLines(file_name));
+				
 			// Close the input stream
 			in.close();
 		} catch (Exception e) {// Catch exception if any
