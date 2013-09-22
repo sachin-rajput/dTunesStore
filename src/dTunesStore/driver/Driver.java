@@ -4,6 +4,10 @@
 package dTunesStore.driver;
 
 import java.io.*;
+
+import com.sun.corba.se.spi.orb.ParserData;
+import com.sun.xml.internal.rngom.parse.Parseable;
+
 import dTunesStore.util.Results;
 import dTunesStore.util.Debug;
 import dTunesStore.dataStore.PopulateWorker;
@@ -24,10 +28,24 @@ public class Driver {
 		// TODO Auto-generated method stub
 		
 		/***
+		 * Set DEBUG_VALUE
+		 */
+		
+		Debug debug = new Debug();
+		debug.set_debug_value(Integer.parseInt(args[3]));
+		
+		/***
 		 * Step 1: Open the dataFile for reading check change 
 		 */
+		
 		String file_name = "/Users/sachin/Documents/workspace/dTunesStore/Test.txt";
-
+		new PopulateWorker(); // create a new thread
+		new PopulateWorker(); 
+		
+		/***
+		 * Create threads 
+		 */
+		
 		try {
 			// Open the file that is the first
 			// command line parameter
