@@ -8,7 +8,8 @@ import dTunesStore.dataStore.SearchWorker;
 public class Driver {
 	
 	public static void main(String args[]){
-		System.out.println("lavde");
+		//Step 1: Open the dataFile for reading
+		
 	}
 
 }
