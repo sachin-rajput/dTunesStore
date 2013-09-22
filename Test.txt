@@ -5,4 +5,4 @@ nameB albumB singerB 1.5
 nameA albumA singerA 2.5
 nameB albumB singerB 1.5
 nameA albumA singerA 2.5
-nameB albumB singerB 1.5
+nameB albumB singerB 4.5
