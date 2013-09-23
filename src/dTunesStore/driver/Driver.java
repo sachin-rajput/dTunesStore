@@ -8,6 +8,7 @@ import java.io.*;
 import dTunesStore.util.Results;
 import dTunesStore.util.Debug;
 import dTunesStore.util.Helper;
+import dTunesStore.dataStore.MusicStore;
 import dTunesStore.dataStore.PopulateWorker;
 import dTunesStore.dataStore.SearchWorker;
 
@@ -69,6 +70,9 @@ public class Driver {
 				to = from + chunk_size - 1;
 			}
 
+			MusicStore musicStore = new MusicStore();
+			musicStore.displayData();
+			
 		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
 		}
