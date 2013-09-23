@@ -45,7 +45,7 @@ public class PopulateWorker implements Runnable {
 				if(cnt>=from && cnt<=to){
 					String details[] = strLine.split(" ");
 					
-					MusicStore musicStore = new MusicStore();
+					MusicStore musicStore = MusicStore.getUniqueInstance();
 					//musicStore.createStructure(songName, albumName, leadName, duration)
 					musicStore.createStructure(details[0],details[1],details[2],details[3]);
 					
