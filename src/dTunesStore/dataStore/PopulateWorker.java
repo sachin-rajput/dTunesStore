@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class PopulateWorker implements Runnable {
 	Thread t;
@@ -12,7 +13,7 @@ public class PopulateWorker implements Runnable {
 	private int to;
 	private long thread_no;
 
-	public PopulateWorker(String file_name, int from, int to) {
+	public PopulateWorker(List<Thread> threads, String file_name, int from, int to) {
 
 		this.filename = file_name;
 		this.from = from;
@@ -23,6 +24,7 @@ public class PopulateWorker implements Runnable {
 		this.thread_no = t.getId();
 		
 		t.start();
+		threads.add(t);
 	}
 
 	@Override

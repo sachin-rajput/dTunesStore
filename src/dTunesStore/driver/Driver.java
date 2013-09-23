@@ -4,6 +4,9 @@
 package dTunesStore.driver;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import dTunesStore.util.Results;
 import dTunesStore.util.Debug;
@@ -64,11 +67,17 @@ public class Driver {
 			int from = 0;
 			int to = chunk_size-1;
 			
+			List<Thread> threads = new ArrayList<Thread>();
+			
 			for (int i = 0; i < worker_threads; i++) {
-				new PopulateWorker(file_name,from,to);
+				
+				new PopulateWorker(threads,file_name,from,to);
 				from = to + 1;
 				to = from + chunk_size - 1;
 			}
+			
+			for(Thread t: threads) t.join();
+			
 
 			MusicStore musicStore = MusicStore.getUniqueInstance();
 			System.out.println("---------------------------");
