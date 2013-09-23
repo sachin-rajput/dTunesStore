@@ -18,9 +18,10 @@ public class MusicStore {
 	}
 	
 	public void displayData(){
-		Iterator itr = arrayList.iterator();
+		Iterator<MusicInfo> itr = arrayList.iterator();
 		while(itr.hasNext()){
-		System.out.println(itr.next());
+		System.out.println(itr.next().getSongName() + " " + itr.next().getAlbumName() + " " + 
+				itr.next().getLeadName() + " " + itr.next().getDuration());
 		}
 	}
 }
