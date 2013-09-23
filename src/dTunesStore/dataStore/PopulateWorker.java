@@ -43,6 +43,12 @@ public class PopulateWorker implements Runnable {
 			while ((strLine = br.readLine()) != null) {
 				// Print the content on the console
 				if(cnt>=from && cnt<=to){
+					String details[] = strLine.split(" ");
+					
+					MusicStore musicStore = new MusicStore();
+					//musicStore.createStructure(songName, albumName, leadName, duration)
+					musicStore.createStructure(details[0],details[1],details[2],details[3]);
+					
 					System.out.println(cnt +": "+strLine+" - Thread no : "+this.thread_no);
 				}
 				cnt++;
