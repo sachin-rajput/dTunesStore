@@ -70,7 +70,8 @@ public class Driver {
 				to = from + chunk_size - 1;
 			}
 
-			MusicStore musicStore = new MusicStore();
+			MusicStore musicStore = MusicStore.getUniqueInstance();
+			System.out.println("---------------------------");
 			musicStore.displayData();
 			
 		} catch (Exception e) {// Catch exception if any
