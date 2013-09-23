@@ -6,6 +6,14 @@ import java.util.List;
 
 public class MusicStore {
 	
+	private static MusicStore instance;
+	
+	public static MusicStore getUniqueInstance(){
+		if(instance == null)
+			instance = new MusicStore();
+		return instance;
+	}
+	
 	private List<MusicInfo> arrayList = new ArrayList<MusicInfo>();
 	
 	public void createStructure(String songName,String albumName,String leadName,String duration){
