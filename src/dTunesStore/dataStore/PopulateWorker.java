@@ -1,64 +1,102 @@
 package dTunesStore.dataStore;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
+
+import dTunesStore.util.Helper;
+import dTunesStore.util.DataReader;
 
 public class PopulateWorker implements Runnable {
 	Thread t;
-	private String filename;
-	private int from;
-	private int to;
 	private long thread_no;
+	private List<Thread> threads = new ArrayList<Thread>();
+	private DataReader reader;
+	private MusicStore musicStore;
+	//Helper helper = Helper.getUniqueInstance();
+	
 
-	public PopulateWorker(List<Thread> threads, String file_name, int from, int to) {
-
-		this.filename = file_name;
-		this.from = from;
-		this.to = to;
-
-		t = new Thread(this, "Thread Created!");
-		System.out.println("Child thread: " + t);
-		this.thread_no = t.getId();
+	public PopulateWorker(String file_name, int worker_threads) {
+		//DataReader reader = new DataReader(this.filename);
+		this.reader = new DataReader(file_name);
+		this.musicStore = new MusicStore(); 
+				
+		for (int i = 0; i < worker_threads; i++) {
+			
+			//new PopulateWorker(threads,file_name,from,to);
+			t = new Thread(this, "Thread Created!");
+			System.out.println("Child thread: " + t + " with id: " + t.getId());
+			//System.out.println("Thread config: from" + this.from + " to: " + this.to);
+			//this.thread_no = t.getId();
+			
+			t.start();
+			this.threads.add(t);
+			
+		}
 		
-		t.start();
-		threads.add(t);
+		for(Thread th: this.threads){
+			try {
+				th.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} 
+		
+		/***
+		 * Close file after reading 
+		 */
+		this.reader.close_file();
+		
+		/***
+		 * Lets print the entire DataStructure which we saved
+		 */
+		System.out.println("---------------------------");
+		musicStore.displayData();
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		
-		try {
-			// Open the file that is the first
-			// command line parameter
-			FileInputStream fstream = new FileInputStream(this.filename);
-			
-			// Get the object of DataInputStream
-			DataInputStream in = new DataInputStream(fstream);
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			String strLine;
-			int cnt = 0;
-			// Read File Line By Line
-			while ((strLine = br.readLine()) != null) {
-				// Print the content on the console
-				if(cnt>=from && cnt<=to){
-					String details[] = strLine.split(" ");
-					
-					MusicStore musicStore = MusicStore.getUniqueInstance();
-					//musicStore.createStructure(songName, albumName, leadName, duration)
-					musicStore.createStructure(details[0],details[1],details[2],details[3]);
-					
-					System.out.println(cnt +": "+strLine+" - Thread no : "+this.thread_no);
-				}
-				cnt++;
+		/***
+		 * Read the file 
+		 */
+		int currentThreadId = (int) Thread.currentThread().getId();
+		System.out.println("Child thread: " + Thread.currentThread().getId());
+		
+		this.reader.read_file(currentThreadId,this.musicStore);
+		
+		System.out.println("Exiting Child thread.");
+		
+		/* Thread spawned_t;
+		
+		
+		for(int i=0;i<this.workerthreads;i++){
+			//System.out.println("dd");
+			//Runnable runn = (Runnable) new DataReader();
+			spawned_t = new Thread("Spawned!");
+			System.out.println("Child thread: " + t);
+			spawned_t.start();
+			this.threads.add(spawned_t);
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (Exception e) {// Catch exception if any
-			System.err.println("Error: " + e.getMessage());
 		}
 		
-		System.out.println("Exiting child thread.");
+
+		for(Thread th: this.threads){
+			try {
+				th.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} */
+		
+		
 	}
 }

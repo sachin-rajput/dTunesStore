@@ -14,6 +14,10 @@ public class MusicStore {
 		return instance;
 	}
 	
+	public MusicStore(){
+		
+	}
+	
 	private List<MusicInfo> arrayList = new ArrayList<MusicInfo>();
 	
 	public void createStructure(String songName,String albumName,String leadName,String duration){

@@ -32,7 +32,7 @@ public class Driver {
 		 * Set DEBUG_VALUE
 		 */
 
-		Debug debug = new Debug();
+		Debug debug = Debug.getUniqueInstance();
 		debug.set_debug_value(Integer.parseInt(args[4]));
 
 		System.out.println("DEBUG_VALUE set to : " + debug.get_debug_value());
@@ -43,45 +43,28 @@ public class Driver {
 
 		String file_name = args[0] + ".txt";
 
-		/***
-		 * Create threads
-		 */
-
 		try {
 			
 			
 			/***
-			 * Get number of lines in input file
+			 * Let us set number of lines in input file
 			 */
-			Helper helper = new Helper();
+			Helper helper = Helper.getUniqueInstance();
 			int numberOflines = helper.countLines(file_name);
+			helper.set_file_lines_count(numberOflines);
 			System.out.println("The number of lines : " + numberOflines);
-
-			/***
-			 * Divide the chunks
-			 */
+			
+			
+			
 			int worker_threads = Integer.parseInt(args[1]);
 			int search_threads = Integer.parseInt(args[3]);
-			int chunk_size = numberOflines / worker_threads;
 			
-			int from = 0;
-			int to = chunk_size-1;
-			
-			List<Thread> threads = new ArrayList<Thread>();
-			
-			for (int i = 0; i < worker_threads; i++) {
-				
-				new PopulateWorker(threads,file_name,from,to);
-				from = to + 1;
-				to = from + chunk_size - 1;
-			}
-			
-			for(Thread t: threads) t.join();
-			
+			//file_name,worker_threads
+			new PopulateWorker(file_name, worker_threads);
 
-			MusicStore musicStore = MusicStore.getUniqueInstance();
-			System.out.println("---------------------------");
-			musicStore.displayData();
+			//MusicStore musicStore = MusicStore.getUniqueInstance();
+			//System.out.println("---------------------------");
+			//musicStore.displayData();
 			
 		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
