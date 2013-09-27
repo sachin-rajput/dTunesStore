@@ -66,6 +66,13 @@ public class Driver {
 			//System.out.println("---------------------------");
 			//musicStore.displayData();
 			
+			/***
+			 * After storing the data from text file to data structure 
+			 * let us try to open the search file and try to find the entries
+			 * if entry found then add to results data structure
+			 */
+			
+			
 		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
 		}

@@ -1,10 +1,8 @@
 package dTunesStore.dataStore;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import dTunesStore.util.Helper;
 import dTunesStore.util.DataReader;
 
 public class PopulateWorker implements Runnable {
