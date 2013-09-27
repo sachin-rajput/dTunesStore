@@ -42,7 +42,7 @@ public class DataReader {
 				while ((sCurrentLine = br.readLine()) != null) {
 					String details[] = sCurrentLine.split(" ");
 					//musicStore.createStructure(songName, albumName, leadName, duration)
-					musicStore.createStructure(details[0],details[1],details[2],details[3]);
+					musicStore.arrayList.add(musicStore.createStructure(details[0],details[1],details[2],details[3]));
 					
 					System.out.println("Thread id: "+ currentThreadId + " - " +sCurrentLine);
 				}

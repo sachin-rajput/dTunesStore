@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dTunesStore.util.DataReader;
+import dTunesStore.util.Results;
 
 public class SearchWorker implements Runnable {
 	Thread t;
@@ -11,7 +12,7 @@ public class SearchWorker implements Runnable {
 	private DataReader reader;
 	private MusicStore musicStore;
 
-	public SearchWorker(String file_name, int search_threads) {
+	public SearchWorker(String file_name, int search_threads, Results results) {
 		this.reader = new DataReader(file_name);
 		this.musicStore = new MusicStore();
 
@@ -54,5 +55,9 @@ public class SearchWorker implements Runnable {
 		 */
 		int currentThreadId = (int) Thread.currentThread().getId();
 		System.out.println("Child thread: " + Thread.currentThread().getId());
+		
+		this.reader.read_file(currentThreadId,this.musicStore);
+		
+		System.out.println("Exiting Child thread.");
 	}
 }

@@ -72,6 +72,10 @@ public class Driver {
 			 * if entry found then add to results data structure
 			 */
 			
+			String search_file_name = args[2] + ".txt";
+			
+			Results results = new Results();
+			new SearchWorker(search_file_name,search_threads,results);
 			
 		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
