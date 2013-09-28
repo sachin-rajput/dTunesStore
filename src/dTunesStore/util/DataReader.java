@@ -18,7 +18,8 @@ public class DataReader {
 	Helper helper = new Helper();
 	
 	/***
-	 * Let's create a null data structure
+	 * Let's create a null DATA STRUCTURE
+	 *  DATA STRUCTURE IMPACT ZONE
 	 * @param filename
 	 * @param arrayList
 	 */
@@ -28,6 +29,12 @@ public class DataReader {
 	private MusicInfo currentObj;
 	//MusicStore musicStore = MusicStore.getUniqueInstance();
 	
+	/***
+	 * DATA STRUCTURE IMPACT ZONE in parameter 
+	 * 
+	 * @param filename
+	 * @param arrayList
+	 */
 	public DataReader(String filename,List<MusicInfo> arrayList){
 		this.file_name = filename;
 		this.array_List = arrayList;
@@ -35,11 +42,17 @@ public class DataReader {
 		this.open_file();
 	}
 	
+	/***
+	 * DATA STRUCTURE IMPACT ZONE in parameter 
+	 * 
+	 * @param filename
+	 * @param arrayList
+	 * @param dataStoreList
+	 */
 	public DataReader(String filename,List<MusicInfo> arrayList, List<MusicInfo> dataStoreList){
 		this.file_name = filename;
 		this.array_List = arrayList;
 		this.dataStore_List = dataStoreList;
-		
 		
 		this.open_file();
 	}
@@ -73,6 +86,9 @@ public class DataReader {
 				while ((sCurrentLine = br.readLine()) != null) {
 					String details[] = sCurrentLine.split(" ");
 					//musicStore.createStructure(songName, albumName, leadName, duration)
+					
+					//DATA STRUCTURE IMPACT ZONE variable array_List 
+					
 					if(mode == "saveToDS")
 						array_List.add(helper.createStructure(details[0],details[1],details[2],details[3]));
 					else if(mode == "search"){
@@ -92,6 +108,7 @@ public class DataReader {
 	
 	public synchronized void search_file(int currentThreadId,String Datatosearch){
 		
+		//DATA STRUCTURE IMPACT ZONE variable dataStore_List
 		Iterator<MusicInfo> itr = this.dataStore_List.iterator();
 		
 		while(itr.hasNext()){

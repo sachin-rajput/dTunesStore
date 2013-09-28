@@ -18,6 +18,7 @@ public class MusicStore {
 		
 	}
 	
+	//DATA STRUCTURE IMPACT ZONE 
 	public List<MusicInfo> arrayList = new ArrayList<MusicInfo>();
 	
 //	public MusicInfo createStructure(String songName,String albumName,String leadName,String duration){
@@ -31,6 +32,7 @@ public class MusicStore {
 //	}
 	
 	public void displayData(){
+		//DATA STRUCTURE IMPACT ZONE entire function
 		Iterator<MusicInfo> itr = arrayList.iterator();
 		MusicInfo currentObj;
 		

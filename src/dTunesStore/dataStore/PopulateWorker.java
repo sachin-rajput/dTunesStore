@@ -18,6 +18,7 @@ public class PopulateWorker implements Runnable {
 		// DataReader reader = new DataReader(this.filename);
 		this.worker_threads = worker_threads;
 		this.musicStore = new MusicStore();
+		//DATA STRUCTURE IMPACT ZONE in parameter
 		this.reader = new DataReader(file_name, this.musicStore.arrayList);
 	}
 

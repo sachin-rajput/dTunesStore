@@ -16,6 +16,8 @@ public class SearchWorker implements Runnable {
 	public SearchWorker(String file_name, int search_threads, Results results,MusicStore musicStore) {
 		this.musicStore = musicStore;
 		this.results = results;
+		
+		//DATA STRUCTURE IMPACT ZONE in parameter 
 		this.reader = new DataReader(file_name,this.results.arrayList,this.musicStore.arrayList);
 		
 
