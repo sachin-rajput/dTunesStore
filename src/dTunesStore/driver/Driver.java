@@ -60,8 +60,9 @@ public class Driver {
 			int search_threads = Integer.parseInt(args[3]);
 			
 			//file_name,worker_threads
-			new PopulateWorker(file_name, worker_threads);
-
+			PopulateWorker populateWorker = new PopulateWorker(file_name, worker_threads);
+			MusicStore musicStore = populateWorker.createThreads();
+			
 			//MusicStore musicStore = MusicStore.getUniqueInstance();
 			//System.out.println("---------------------------");
 			//musicStore.displayData();
@@ -75,7 +76,7 @@ public class Driver {
 			String search_file_name = args[2] + ".txt";
 			
 			Results results = new Results();
-			new SearchWorker(search_file_name,search_threads,results);
+			new SearchWorker(search_file_name,search_threads,results,musicStore);
 			
 		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());

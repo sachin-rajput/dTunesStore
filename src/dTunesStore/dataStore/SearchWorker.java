@@ -12,9 +12,9 @@ public class SearchWorker implements Runnable {
 	private DataReader reader;
 	private MusicStore musicStore;
 
-	public SearchWorker(String file_name, int search_threads, Results results) {
-		this.musicStore = new MusicStore();
-		this.reader = new DataReader(file_name,this.musicStore.arrayList);
+	public SearchWorker(String file_name, int search_threads, Results results,MusicStore musicStore) {
+		this.musicStore = musicStore;
+		this.reader = new DataReader(file_name,results.arrayList,this.musicStore.arrayList);
 		
 
 		for (int i = 0; i < search_threads; i++) {
@@ -58,6 +58,7 @@ public class SearchWorker implements Runnable {
 		System.out.println("Child thread: " + Thread.currentThread().getId());
 		
 		//this.reader.read_file(currentThreadId);
+		this.reader.search_file(currentThreadId);
 		
 		System.out.println("Exiting Child thread.");
 	}
