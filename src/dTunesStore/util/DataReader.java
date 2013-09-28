@@ -66,15 +66,20 @@ public class DataReader {
 		}
 	}
 	
-	public void read_file(int currentThreadId) {
+	public void read_file(int currentThreadId,String mode) {
 		
 			String sCurrentLine;
 			try {
 				while ((sCurrentLine = br.readLine()) != null) {
 					String details[] = sCurrentLine.split(" ");
 					//musicStore.createStructure(songName, albumName, leadName, duration)
-					array_List.add(helper.createStructure(details[0],details[1],details[2],details[3]));
-					
+					if(mode == "saveToDS")
+						array_List.add(helper.createStructure(details[0],details[1],details[2],details[3]));
+					else if(mode == "search"){
+						System.out.println("sdd");
+						search_file(currentThreadId,sCurrentLine);
+						
+					}
 					System.out.println("Thread id: "+ currentThreadId + " - " +sCurrentLine);
 				}
 			} catch (IOException e) {
@@ -85,15 +90,22 @@ public class DataReader {
 			}		
 	}
 	
-	public void search_file(int currentThreadId){
+	public void search_file(int currentThreadId,String Datatosearch){
 		
 		
 		while(itr.hasNext()){
 			currentObj = itr.next();
-			System.out.println("thread id : "+currentThreadId+" - "+currentObj.getSongName() + " " + currentObj.getAlbumName() + " " + 
-					currentObj.getLeadName() + " " + currentObj.getDuration());
+			String songname = currentObj.getSongName();
+			String leadname = currentObj.getLeadName();
+			String albumname = currentObj.getAlbumName();
+			Double duration = currentObj.getDuration();
+			if(songname == Datatosearch || leadname == Datatosearch || albumname == Datatosearch){
+				System.out.println("thread id : "+currentThreadId+" - "+songname + " " + albumname + " " + 
+						leadname + " " + duration);
+				array_List.add(helper.createStructure(songname,albumname,leadname,duration.toString()));
+			}
 		}
 		
-		System.out.println("The size of array is : " + dataStore_List.size());
+		//System.out.println("The size of array is : " + dataStore_List.size());
 	}
 }

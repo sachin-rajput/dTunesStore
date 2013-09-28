@@ -11,10 +11,12 @@ public class SearchWorker implements Runnable {
 	private List<Thread> threads = new ArrayList<Thread>();
 	private DataReader reader;
 	private MusicStore musicStore;
-
+	private Results results;
+	
 	public SearchWorker(String file_name, int search_threads, Results results,MusicStore musicStore) {
 		this.musicStore = musicStore;
-		this.reader = new DataReader(file_name,results.arrayList,this.musicStore.arrayList);
+		this.results = results;
+		this.reader = new DataReader(file_name,this.results.arrayList,this.musicStore.arrayList);
 		
 
 		for (int i = 0; i < search_threads; i++) {
@@ -39,11 +41,17 @@ public class SearchWorker implements Runnable {
 				e.printStackTrace();
 			}
 		}
-
+		
 		/***
 		 * Close file after reading
 		 */
 		this.reader.close_file();
+		
+		/***
+		 * Lets print the entire DataStructure which we saved
+		 */
+		System.out.println("---------------------------");
+		this.results.displayData();
 
 	}
 
@@ -57,8 +65,8 @@ public class SearchWorker implements Runnable {
 		int currentThreadId = (int) Thread.currentThread().getId();
 		System.out.println("Child thread: " + Thread.currentThread().getId());
 		
-		//this.reader.read_file(currentThreadId);
-		this.reader.search_file(currentThreadId);
+		this.reader.read_file(currentThreadId,"search");
+		//this.reader.search_file(currentThreadId);
 		
 		System.out.println("Exiting Child thread.");
 	}
