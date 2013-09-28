@@ -20,18 +20,10 @@ public class MusicStore {
 	
 	public List<MusicInfo> arrayList = new ArrayList<MusicInfo>();
 	
-	public MusicInfo createStructure(String songName,String albumName,String leadName,String duration){
-		MusicInfo record = new MusicInfo();
-		record.setSongName(songName);
-		record.setLeadName(leadName);
-		record.setAlbumName(albumName);
-		record.setDuration(Double.parseDouble(duration));
-		//arrayList.add(record);
-		return record;
-	}
+	
 	
 	public void displayData(){
-		Iterator<MusicInfo> itr = arrayList.iterator();
+		Iterator<MusicInfo> itr = this.arrayList.iterator();
 		MusicInfo currentObj;
 		
 		while(itr.hasNext()){

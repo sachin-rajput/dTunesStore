@@ -16,8 +16,9 @@ public class PopulateWorker implements Runnable {
 
 	public PopulateWorker(String file_name, int worker_threads) {
 		//DataReader reader = new DataReader(this.filename);
-		this.reader = new DataReader(file_name);
 		this.musicStore = new MusicStore(); 
+		this.reader = new DataReader(file_name,this.musicStore.arrayList);
+		
 				
 		for (int i = 0; i < worker_threads; i++) {
 			
@@ -63,7 +64,7 @@ public class PopulateWorker implements Runnable {
 		int currentThreadId = (int) Thread.currentThread().getId();
 		System.out.println("Child thread: " + Thread.currentThread().getId());
 		
-		this.reader.read_file(currentThreadId,this.musicStore);
+		this.reader.read_file(currentThreadId);
 		
 		System.out.println("Exiting Child thread.");
 		
