@@ -50,7 +50,7 @@ public class SearchWorker implements Runnable {
 		/***
 		 * Lets print the entire DataStructure which we saved
 		 */
-		System.out.println("---------------------------");
+		System.out.println("---------- Results Data Structure -----------------");
 		this.results.displayData();
 
 	}

@@ -24,7 +24,7 @@ public class DataReader {
 	 */
 	public List<MusicInfo> array_List = new ArrayList<MusicInfo>();
 	public List<MusicInfo> dataStore_List = new ArrayList<MusicInfo>();
-	private Iterator<MusicInfo> itr;
+	
 	private MusicInfo currentObj;
 	//MusicStore musicStore = MusicStore.getUniqueInstance();
 	
@@ -39,7 +39,7 @@ public class DataReader {
 		this.file_name = filename;
 		this.array_List = arrayList;
 		this.dataStore_List = dataStoreList;
-		this.itr = this.dataStore_List.iterator();
+		
 		
 		this.open_file();
 	}
@@ -76,11 +76,11 @@ public class DataReader {
 					if(mode == "saveToDS")
 						array_List.add(helper.createStructure(details[0],details[1],details[2],details[3]));
 					else if(mode == "search"){
-						System.out.println("sdd");
+						//System.out.println("sdd");
 						search_file(currentThreadId,sCurrentLine);
 						
 					}
-					System.out.println("Thread id: "+ currentThreadId + " - " +sCurrentLine);
+					//System.out.println("Thread id: "+ currentThreadId + " - " +sCurrentLine);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -90,8 +90,9 @@ public class DataReader {
 			}		
 	}
 	
-	public void search_file(int currentThreadId,String Datatosearch){
+	public synchronized void search_file(int currentThreadId,String Datatosearch){
 		
+		Iterator<MusicInfo> itr = this.dataStore_List.iterator();
 		
 		while(itr.hasNext()){
 			currentObj = itr.next();
@@ -99,13 +100,13 @@ public class DataReader {
 			String leadname = currentObj.getLeadName();
 			String albumname = currentObj.getAlbumName();
 			Double duration = currentObj.getDuration();
-			if(songname == Datatosearch || leadname == Datatosearch || albumname == Datatosearch){
-				System.out.println("thread id : "+currentThreadId+" - "+songname + " " + albumname + " " + 
+			
+			if(songname.equals(Datatosearch) || leadname.equals(Datatosearch) || albumname.equals(Datatosearch)){
+				System.out.println("found !!! thread id : "+currentThreadId+" - "+songname + " " + albumname + " " + 
 						leadname + " " + duration);
 				array_List.add(helper.createStructure(songname,albumname,leadname,duration.toString()));
-			}
+			} 
 		}
 		
-		//System.out.println("The size of array is : " + dataStore_List.size());
 	}
 }
