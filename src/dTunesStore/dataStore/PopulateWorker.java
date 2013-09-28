@@ -19,7 +19,7 @@ public class PopulateWorker implements Runnable {
 		this.worker_threads = worker_threads;
 		this.musicStore = new MusicStore();
 		//DATA STRUCTURE IMPACT ZONE in parameter
-		this.reader = new DataReader(file_name, this.musicStore.arrayList);
+		this.reader = new DataReader(file_name, this.musicStore.vector);
 	}
 
 	public MusicStore createThreads() {
@@ -69,7 +69,7 @@ public class PopulateWorker implements Runnable {
 		 */
 		int currentThreadId = (int) Thread.currentThread().getId();
 		System.out.println("Child thread: " + Thread.currentThread().getId());
-
+		
 		this.reader.read_file(currentThreadId,"saveToDS");
 
 		System.out.println("Exiting Child thread.");
