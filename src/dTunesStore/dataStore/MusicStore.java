@@ -3,6 +3,7 @@ package dTunesStore.dataStore;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 public class MusicStore {
 	
@@ -19,7 +20,7 @@ public class MusicStore {
 	}
 	
 	//DATA STRUCTURE IMPACT ZONE 
-	public List<MusicInfo> arrayList = new ArrayList<MusicInfo>();
+	public Vector<MusicInfo> vector = new Vector<MusicInfo>();
 	
 //	public MusicInfo createStructure(String songName,String albumName,String leadName,String duration){
 //		MusicInfo record = new MusicInfo();
@@ -33,7 +34,7 @@ public class MusicStore {
 	
 	public void displayData(){
 		//DATA STRUCTURE IMPACT ZONE entire function
-		Iterator<MusicInfo> itr = arrayList.iterator();
+		Iterator<MusicInfo> itr = vector.iterator();
 		MusicInfo currentObj;
 		
 		while(itr.hasNext()){
@@ -42,6 +43,6 @@ public class MusicStore {
 					currentObj.getLeadName() + " " + currentObj.getDuration());
 		}
 		
-		System.out.println("The size of array is : " + arrayList.size());
+		System.out.println("The size of vector is : " + vector.size());
 	}
 }
