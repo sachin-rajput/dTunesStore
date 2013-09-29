@@ -9,7 +9,7 @@ import dTunesStore.dataStore.MusicInfo;
 public class Results {
 	
 	public Results(){
-		
+		Debug.print_debug(4,"Helper constructor called.");
 	}
 	
 	//DATA STRUCTURE IMPACT ZONE
