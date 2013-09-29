@@ -8,6 +8,7 @@ import dTunesStore.dataStore.MusicInfo;
 
 public class Results {
 	
+	
 	public Results(){
 		Debug.print_debug(4,"Helper constructor called.");
 	}
@@ -15,28 +16,26 @@ public class Results {
 	//DATA STRUCTURE IMPACT ZONE
 	public List<MusicInfo> arrayList = new ArrayList<MusicInfo>();
 	
-//	public MusicInfo createStructure(String songName,String albumName,String leadName,String duration){
-//		MusicInfo record = new MusicInfo();
-//		record.setSongName(songName);
-//		record.setLeadName(leadName);
-//		record.setAlbumName(albumName);
-//		record.setDuration(Double.parseDouble(duration));
-//		//arrayList.add(record);
-//		return record;
-//	}
 	
 	public void displayData(){
 		//DATA STRUCTURE IMPACT ZONE entire function 
 		Iterator<MusicInfo> itr = arrayList.iterator();
+		
 		MusicInfo currentObj;
 		
 		while(itr.hasNext()){
 			currentObj = itr.next();
-			System.out.println(currentObj.getSongName() + " " + currentObj.getAlbumName() + " " + 
-					currentObj.getLeadName() + " " + currentObj.getDuration());
+			stream_output("stdout",currentObj);
 		}
 		
 		System.out.println("The size of array is : " + arrayList.size());
+	}
+	
+	public void stream_output(String type,MusicInfo currentObj){
+		if(type == "stdout"){
+			System.out.println(currentObj.getSongName() + " " + currentObj.getAlbumName() + " " + 
+					currentObj.getLeadName() + " " + currentObj.getDuration());
+		}
 	}
 	
 }
