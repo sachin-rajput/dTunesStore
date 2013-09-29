@@ -6,7 +6,7 @@ import java.util.List;
 
 import dTunesStore.dataStore.MusicInfo;
 
-public class Results {
+public class Results implements StoreOperationsInterface {
 	
 	
 	public Results(){
@@ -25,16 +25,17 @@ public class Results {
 		
 		while(itr.hasNext()){
 			currentObj = itr.next();
-			stream_output("stdout",currentObj);
+			streamOutput("stdout",currentObj);
 		}
 		
 		System.out.println("The size of array is : " + arrayList.size());
 	}
 	
-	public void stream_output(String type,MusicInfo currentObj){
+	public void streamOutput(String type,Object currentObj){
+		MusicInfo musicInfo = (MusicInfo)currentObj;
 		if(type == "stdout"){
-			System.out.println(currentObj.getSongName() + " " + currentObj.getAlbumName() + " " + 
-					currentObj.getLeadName() + " " + currentObj.getDuration());
+			System.out.println(musicInfo.getSongName() + " " + musicInfo.getAlbumName() + " " + 
+					musicInfo.getLeadName() + " " + musicInfo.getDuration());
 		}
 	}
 	
