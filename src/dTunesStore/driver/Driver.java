@@ -28,10 +28,10 @@ public class Driver {
 		 * Set DEBUG_VALUE
 		 */
 
-		Debug debug = Debug.getUniqueInstance();
-		debug.set_debug_value(Integer.parseInt(args[4]));
+		//Debug debug = Debug.getUniqueInstance();
+		Debug.set_debug_value(Integer.parseInt(args[4]));
 
-		System.out.println("DEBUG_VALUE set to : " + debug.get_debug_value());
+		//System.out.println("DEBUG_VALUE set to : " + Debug.get_debug_value());
 
 		/***
 		 * Step 1: Open the dataFile for reading check change
@@ -48,7 +48,7 @@ public class Driver {
 			Helper helper = Helper.getUniqueInstance();
 			int numberOflines = helper.countLines(file_name);
 			helper.set_file_lines_count(numberOflines);
-			System.out.println("The number of lines : " + numberOflines);
+			//System.out.println("The number of lines : " + numberOflines);
 			
 			
 			
