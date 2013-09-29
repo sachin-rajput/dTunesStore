@@ -7,24 +7,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 import dTunesStore.dataStore.MusicInfo;
 import dTunesStore.dataStore.MusicStore;
 
 public class DataReader {
 	
-	private String file_name;
+	private String fileName;
 	BufferedReader br = null;
 	Helper helper = new Helper();
 	
 	/***
 	 * Let's create a null DATA STRUCTURE
 	 *  DATA STRUCTURE IMPACT ZONE
-	 * @param filename
+	 * @param fileName
 	 * @param arrayList
 	 */
-	public List<MusicInfo> array_List = new ArrayList<MusicInfo>();
-	public List<MusicInfo> dataStore_List = new ArrayList<MusicInfo>();
+	Vector<MusicInfo> vector = new Vector<MusicInfo>();
+	//public List<MusicInfo> vector = new ArrayList<MusicInfo>();
+	public List<MusicInfo> resultList = new ArrayList<MusicInfo>();
 	
 	private MusicInfo currentObj;
 	//MusicStore musicStore = MusicStore.getUniqueInstance();
@@ -32,12 +34,13 @@ public class DataReader {
 	/***
 	 * DATA STRUCTURE IMPACT ZONE in parameter 
 	 * 
-	 * @param filename
+	 * @param fileName
 	 * @param arrayList
 	 */
-	public DataReader(String filename,List<MusicInfo> arrayList){
-		this.file_name = filename;
-		this.array_List = arrayList;
+	public DataReader(String fileName,Vector<MusicInfo> vector){
+		Debug.print_debug(4,"DataReader constructor(String fileName,Vector<MusicInfo> vector) called.");
+		this.fileName = fileName;
+		this.vector = vector;
 		
 		this.open_file();
 	}
@@ -45,21 +48,22 @@ public class DataReader {
 	/***
 	 * DATA STRUCTURE IMPACT ZONE in parameter 
 	 * 
-	 * @param filename
+	 * @param fileName
 	 * @param arrayList
 	 * @param dataStoreList
 	 */
-	public DataReader(String filename,List<MusicInfo> arrayList, List<MusicInfo> dataStoreList){
-		this.file_name = filename;
-		this.array_List = arrayList;
-		this.dataStore_List = dataStoreList;
+	public DataReader(String fileName, List<MusicInfo> resultList,Vector<MusicInfo> vector){
+		Debug.print_debug(4,"DataReader constructor(String fileName, List<MusicInfo> resultList,Vector<MusicInfo>) vector called.");
+		this.fileName = fileName;
+		this.vector = vector;
+		this.resultList = resultList;
 		
 		this.open_file();
 	}
 	
 	public void open_file() {
 		try {
-			br = new BufferedReader(new FileReader(this.file_name));
+			br = new BufferedReader(new FileReader(this.fileName));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,10 +91,10 @@ public class DataReader {
 					String details[] = sCurrentLine.split(" ");
 					//musicStore.createStructure(songName, albumName, leadName, duration)
 					
-					//DATA STRUCTURE IMPACT ZONE variable array_List 
+					//DATA STRUCTURE IMPACT ZONE variable vector 
 					
 					if(mode == "saveToDS")
-						array_List.add(helper.createStructure(details[0],details[1],details[2],details[3]));
+						vector.add(helper.createStructure(details[0],details[1],details[2],details[3]));
 					else if(mode == "search"){
 						//System.out.println("sdd");
 						search_file(currentThreadId,sCurrentLine);
@@ -106,10 +110,10 @@ public class DataReader {
 			}		
 	}
 	
-	public synchronized void search_file(int currentThreadId,String Datatosearch){
+	public synchronized void search_file(int currentThreadId,String DataTosearch){
 		
 		//DATA STRUCTURE IMPACT ZONE variable dataStore_List
-		Iterator<MusicInfo> itr = this.dataStore_List.iterator();
+		Iterator<MusicInfo> itr = this.vector.iterator();
 		
 		while(itr.hasNext()){
 			currentObj = itr.next();
@@ -118,10 +122,13 @@ public class DataReader {
 			String albumname = currentObj.getAlbumName();
 			Double duration = currentObj.getDuration();
 			
-			if(songname.equals(Datatosearch) || leadname.equals(Datatosearch) || albumname.equals(Datatosearch)){
-				System.out.println("found !!! thread id : "+currentThreadId+" - "+songname + " " + albumname + " " + 
+			if(songname.equals(DataTosearch) || leadname.equals(DataTosearch) || albumname.equals(DataTosearch)){
+				if(Debug.get_debug_value()==1){
+				System.out.println("Entry found by thread  : "+currentThreadId+" - "+songname + " " + albumname + " " + 
 						leadname + " " + duration);
-				array_List.add(helper.createStructure(songname,albumname,leadname,duration.toString()));
+				}
+				Debug.print_debug(2,"New entry added to the result structure");
+				resultList.add(helper.createStructure(songname,albumname,leadname,duration.toString()));
 			} 
 		}
 		
