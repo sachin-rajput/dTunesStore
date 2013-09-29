@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dTunesStore.util.DataReader;
+import dTunesStore.util.Debug;
 import dTunesStore.util.Results;
 
 public class SearchWorker implements Runnable {
@@ -13,19 +14,20 @@ public class SearchWorker implements Runnable {
 	private MusicStore musicStore;
 	private Results results;
 	
-	public SearchWorker(String file_name, int search_threads, Results results,MusicStore musicStore) {
+	public SearchWorker(String fileName, int searchThreads, Results results,MusicStore musicStore) {
+		Debug.print_debug(4,"SearchWorker constructor called.");
 		this.musicStore = musicStore;
 		this.results = results;
 		
 		//DATA STRUCTURE IMPACT ZONE in parameter 
-		this.reader = new DataReader(file_name,this.results.arrayList,this.musicStore.arrayList);
+		this.reader = new DataReader(fileName,this.results.arrayList,this.musicStore.vector);
 		
 
-		for (int i = 0; i < search_threads; i++) {
+		for (int i = 0; i < searchThreads; i++) {
 
-			// new PopulateWorker(threads,file_name,from,to);
+			// new PopulateWorker(threads,fileName,from,to);
 			t = new Thread(this, "Thread Created!");
-			System.out.println("Child thread: " + t + " with id: " + t.getId());
+			//System.out.println("Child thread: " + t + " with id: " + t.getId());
 			// System.out.println("Thread config: from" + this.from + " to: " +
 			// this.to);
 			// this.thread_no = t.getId();
@@ -52,8 +54,8 @@ public class SearchWorker implements Runnable {
 		/***
 		 * Lets print the entire DataStructure which we saved
 		 */
-		System.out.println("---------- Results Data Structure -----------------");
-		this.results.displayData();
+		//System.out.println("---------- Results Data Structure -----------------");
+		//this.results.displayData();
 
 	}
 
@@ -65,11 +67,12 @@ public class SearchWorker implements Runnable {
 		 * Read the file 
 		 */
 		int currentThreadId = (int) Thread.currentThread().getId();
-		System.out.println("Child thread: " + Thread.currentThread().getId());
+		Debug.print_debug(3,"Thread - " + currentThreadId +"'s run method called from SearchWorker.");
+		//System.out.println("Child thread: " + Thread.currentThread().getId());
 		
 		this.reader.read_file(currentThreadId,"search");
 		//this.reader.search_file(currentThreadId);
 		
-		System.out.println("Exiting Child thread.");
+		//System.out.println("Exiting Child thread.");
 	}
 }
