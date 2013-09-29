@@ -9,17 +9,10 @@ import dTunesStore.util.Debug;
 
 public class MusicStore {
 	
-	private static MusicStore instance;
-	
-	public static MusicStore getUniqueInstance(){
-		if(instance == null)
-			instance = new MusicStore();
-		return instance;
+	public MusicStore(){
+		//Debug.print_debug(4,"MusicStore constructor called");
 	}
 	
-	/*public MusicStore(){
-		Debug.print_debug(4,"MusicStore constructor called");
-	}*/
 	
 	//DATA STRUCTURE IMPACT ZONE 
 	public Vector<MusicInfo> vector = new Vector<MusicInfo>();
