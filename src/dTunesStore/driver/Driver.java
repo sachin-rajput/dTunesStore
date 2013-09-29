@@ -37,7 +37,7 @@ public class Driver {
 		 * Step 1: Open the dataFile for reading check change
 		 */
 
-		String file_name = args[0] + ".txt";
+		
 
 		try {
 			
@@ -46,7 +46,14 @@ public class Driver {
 			 * Let us set number of lines in input file
 			 */
 			Helper helper = Helper.getUniqueInstance();
-			int numberOflines = helper.countLines(file_name);
+			int noOfEntries=100000;
+			int noOfSearchTerms=50;
+			int outOfBoundEntries = noOfEntries + 50000;
+			String search_fileName = args[2] + ".txt";
+			String fileName = args[0] + ".txt";
+			helper.createEntriesScript(fileName,noOfEntries);
+			helper.createSearchScript(search_fileName, noOfEntries,outOfBoundEntries ,noOfSearchTerms);
+			int numberOflines = helper.countLines(fileName);
 			helper.set_file_lines_count(numberOflines);
 			//System.out.println("The number of lines : " + numberOflines);
 			
@@ -55,8 +62,8 @@ public class Driver {
 			int worker_threads = Integer.parseInt(args[1]);
 			int search_threads = Integer.parseInt(args[3]);
 			
-			//file_name,worker_threads
-			PopulateWorker populateWorker = new PopulateWorker(file_name, worker_threads);
+			//fileName,worker_threads
+			PopulateWorker populateWorker = new PopulateWorker(fileName, worker_threads);
 			MusicStore musicStore = populateWorker.createThreads();
 			
 			//MusicStore musicStore = MusicStore.getUniqueInstance();
@@ -69,10 +76,10 @@ public class Driver {
 			 * if entry found then add to results data structure
 			 */
 			
-			String search_file_name = args[2] + ".txt";
+			
 			
 			Results results = new Results();
-			new SearchWorker(search_file_name,search_threads,results,musicStore);
+			new SearchWorker(search_fileName,search_threads,results,musicStore);
 			
 		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
