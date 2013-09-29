@@ -20,6 +20,7 @@ public class Helper {
 	}
 	
 	public Helper(){
+		Debug.print_debug(4,"Helper constructor called.");
 		
 	}
 	
