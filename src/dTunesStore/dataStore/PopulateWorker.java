@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dTunesStore.util.DataReader;
+import dTunesStore.util.Debug;
 
 public class PopulateWorker implements Runnable {
 	Thread t;
@@ -15,6 +16,7 @@ public class PopulateWorker implements Runnable {
 	// Helper helper = Helper.getUniqueInstance();
 
 	public PopulateWorker(String file_name, int worker_threads) {
+		Debug.print_debug(4,"PopulateWorker constructor called.");
 		// DataReader reader = new DataReader(this.filename);
 		this.worker_threads = worker_threads;
 		this.musicStore = new MusicStore();
@@ -27,7 +29,7 @@ public class PopulateWorker implements Runnable {
 
 			// new PopulateWorker(threads,file_name,from,to);
 			t = new Thread(this, "Thread Created!");
-			System.out.println("Child thread: " + t + " with id: " + t.getId());
+			//System.out.println("Child thread: " + t + " with id: " + t.getId());
 			// System.out.println("Thread config: from" + this.from + " to: " +
 			// this.to);
 			// this.thread_no = t.getId();
@@ -54,8 +56,8 @@ public class PopulateWorker implements Runnable {
 		/***
 		 * Lets print the entire DataStructure which we saved
 		 */
-		System.out.println("---------------------------");
-		musicStore.displayData();
+		//System.out.println("---------------------------");
+		//musicStore.displayData();
 		
 		return musicStore;
 	}
@@ -68,28 +70,12 @@ public class PopulateWorker implements Runnable {
 		 * Read the file
 		 */
 		int currentThreadId = (int) Thread.currentThread().getId();
-		System.out.println("Child thread: " + Thread.currentThread().getId());
+		Debug.print_debug(3,"Thread - " + currentThreadId +"'s run method called from PopulateWorker.");
+		//System.out.println("Child thread: " + Thread.currentThread().getId());
 		
 		this.reader.read_file(currentThreadId,"saveToDS");
 
-		System.out.println("Exiting Child thread.");
-
-		/*
-		 * Thread spawned_t;
-		 * 
-		 * 
-		 * for(int i=0;i<this.workerthreads;i++){ //System.out.println("dd");
-		 * //Runnable runn = (Runnable) new DataReader(); spawned_t = new
-		 * Thread("Spawned!"); System.out.println("Child thread: " + t);
-		 * spawned_t.start(); this.threads.add(spawned_t); try {
-		 * Thread.sleep(200); } catch (InterruptedException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); } }
-		 * 
-		 * 
-		 * for(Thread th: this.threads){ try { th.join(); } catch
-		 * (InterruptedException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } }
-		 */
+		//System.out.println("Exiting Child thread.");
 
 	}
 }
