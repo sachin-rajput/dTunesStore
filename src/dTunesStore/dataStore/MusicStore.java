@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import dTunesStore.util.Debug;
+
 public class MusicStore {
 	
 	private static MusicStore instance;
@@ -15,9 +17,9 @@ public class MusicStore {
 		return instance;
 	}
 	
-	public MusicStore(){
-		
-	}
+	/*public MusicStore(){
+		Debug.print_debug(4,"MusicStore constructor called");
+	}*/
 	
 	//DATA STRUCTURE IMPACT ZONE 
 	public Vector<MusicInfo> vector = new Vector<MusicInfo>();
