@@ -12,16 +12,16 @@ public class Debug {
 	}
 
 	// accessor and mutator for DEBUG_VALUE
-	public void set_debug_value(int value) {
-		this.DEBUG_VALUE = value;
+	public static void set_debug_value(int value) {
+		DEBUG_VALUE = value;
 	}
 
-	public int get_debug_value() {
-		return this.DEBUG_VALUE;
+	public static int get_debug_value() {
+		return DEBUG_VALUE;
 	}
 
-	public void print_debug(int value, String Message) {
-		if (this.get_debug_value() == value)
+	public static void print_debug(int value, String Message) {
+		if (get_debug_value() == value)
 			System.out.println(Message);
 	}
 }
