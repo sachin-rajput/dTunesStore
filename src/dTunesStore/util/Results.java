@@ -37,6 +37,8 @@ public class Results implements StoreOperationsInterface {
 	
 	/**
 	 * Helper method for displayData
+	 * @param type
+	 * @param currentObj - object that should be displayed
 	 */
 	public void streamOutput(String type,Object currentObj){
 		MusicInfo musicInfo = (MusicInfo)currentObj;
