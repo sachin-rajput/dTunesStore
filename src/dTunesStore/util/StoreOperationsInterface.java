@@ -1,6 +1,5 @@
 package dTunesStore.util;
 
-
 public interface StoreOperationsInterface {
 	/**
 	 * This method can be implemented by any class as per the requirement of the data structure
@@ -15,4 +14,5 @@ public interface StoreOperationsInterface {
 	 */
 	public void streamOutput(String type,Object currentObj);
 	
+
 }
