@@ -10,29 +10,21 @@ public class Helper {
 	private int file_lines_count;
 	private static Helper instance;
 	
-	/***
-	 * 
-	 * @return Helper instance 
+	/**
+	 * Constructor for Helper class
 	 */
-	public static Helper getUniqueInstance() {
-		if(instance==null)
-			instance = new Helper();
-		return instance;
-	}
-	
 	public Helper(){
-		Debug.print_debug(4,"Helper constructor called.");
-		
+		Debug.printDebug(4,"Helper constructor called.");
 	}
 	
-	public void set_file_lines_count(int lines) {
-		this.file_lines_count = lines;
-	}
-	
-	public int get_file_lines_count() {
-		return this.file_lines_count;
-	}
-	
+	/**
+	 * This method sets the below parameters to the MusicInfo object
+	 * @param songName
+	 * @param albumName
+	 * @param leadName
+	 * @param duration
+	 * @return MusicInfo
+	 */
 	public MusicInfo createStructure(String songName,String albumName,String leadName,String duration){
 		MusicInfo record = new MusicInfo();
 		record.setSongName(songName);
@@ -43,17 +35,11 @@ public class Helper {
 		return record;
 	}
 	
-	public int countLines(String filename) throws IOException {
-	    LineNumberReader reader  = new LineNumberReader(new FileReader(filename));
-	int cnt = 0;
-	String lineRead = "";
-	while ((lineRead = reader.readLine()) != null) {}
-
-	cnt = reader.getLineNumber(); 
-	reader.close();
-	return cnt;
-	}
-	
+	/**
+	 * This method contains the script to create entries for the DataFile 
+	 * @param fileName
+	 * @param noOfEntries
+	 */
 	public void createEntriesScript(String fileName,int noOfEntries){
 		try {
 			 Random generator = new Random();
@@ -74,6 +60,13 @@ public class Helper {
 	        }
 	    }
 	
+	/**
+	 * This method contains the script to create search terms for the Search file
+	 * @param fileName
+	 * @param noOfEntries
+	 * @param outOfBoundEntries
+	 * @param noOfSearchTerms
+	 */
 	public void createSearchScript(String fileName,int noOfEntries,int outOfBoundEntries,int noOfSearchTerms){
 		try {
 			 Random number = new Random();
