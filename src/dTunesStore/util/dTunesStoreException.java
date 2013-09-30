@@ -20,6 +20,8 @@ public class dTunesStoreException extends Exception {
 		case 4:
 			System.err.println("Missing argument for DEBUG_VALUE");
 			break;
+		case 5:
+			System.err.println("Null DataStructure found!");
 		default:
 			break;
 		}
