@@ -14,7 +14,7 @@ public class Debug {
 	
 	/**
 	 * Setter method(mutator) for DEBUG_VALUE
-	 * @param value
+	 * @param value - set the DEBUG_VALUE to this
 	 */
 	public static void setDebugValue(int value) {
 		DEBUG_VALUE = value;
@@ -22,7 +22,7 @@ public class Debug {
 	
 	/**
 	 * Getter(accessor) for DEBUG_VALUE
-	 * @return
+	 * @return - returns the DEBUG_VALUE
 	 */
 	public static int getDebugValue() {
 		return DEBUG_VALUE;
@@ -30,8 +30,8 @@ public class Debug {
 	
 	/**
 	 * Prints the contents as per the debug value
-	 * @param value
-	 * @param Message
+	 * @param value - DEBUG_VALUE
+	 * @param Message - message to print
 	 */
 	public static void printDebug(int value, String Message) {
 		if (getDebugValue() == value)
