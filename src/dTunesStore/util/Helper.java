@@ -19,11 +19,11 @@ public class Helper {
 	
 	/**
 	 * This method sets the below parameters to the MusicInfo object
-	 * @param songName
-	 * @param albumName
-	 * @param leadName
-	 * @param duration
-	 * @return MusicInfo
+	 * @param songName - name of the song
+	 * @param albumName - name of the album
+	 * @param leadName - name of the lead
+	 * @param duration - duration of the song
+	 * @return MusicInfo - returns the MusicInfo object
 	 */
 	public MusicInfo createStructure(String songName,String albumName,String leadName,String duration){
 		MusicInfo record = new MusicInfo();
@@ -31,14 +31,13 @@ public class Helper {
 		record.setLeadName(leadName);
 		record.setAlbumName(albumName);
 		record.setDuration(Double.parseDouble(duration));
-		//arrayList.add(record);
 		return record;
 	}
 	
 	/**
 	 * This method contains the script to create entries for the DataFile 
-	 * @param fileName
-	 * @param noOfEntries
+	 * @param fileName - data file name
+	 * @param noOfEntries - number of entries
 	 */
 	public void createEntriesScript(String fileName,int noOfEntries){
 		try {
@@ -62,10 +61,10 @@ public class Helper {
 	
 	/**
 	 * This method contains the script to create search terms for the Search file
-	 * @param fileName
-	 * @param noOfEntries
-	 * @param outOfBoundEntries
-	 * @param noOfSearchTerms
+	 * @param fileName - search file name
+	 * @param noOfEntries - number of entries in the data file
+	 * @param outOfBoundEntries - a bound to create search terms not present in the data file
+	 * @param noOfSearchTerms - number of search terms
 	 */
 	public void createSearchScript(String fileName,int noOfEntries,int outOfBoundEntries,int noOfSearchTerms){
 		try {
