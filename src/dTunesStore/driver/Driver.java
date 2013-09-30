@@ -21,7 +21,7 @@ public class Driver {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) throws dTunesStoreException {
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		try {
@@ -35,7 +35,7 @@ public class Driver {
 			int search_threads = Integer.parseInt(args[3]);
 			Debug.set_debug_value(Integer.parseInt(args[4]));
 			
-			Helper helper = Helper.getUniqueInstance();
+			Helper helper = new Helper();
 			
 			/**
 			 * Script to create the dataFile and searchFile
@@ -45,12 +45,12 @@ public class Driver {
 			int outOfBoundEntries = noOfEntries + 50000;
 			
 			/**
-			 * Create dataFile
+			 * Create dataFile with fileName
 			 */
 			helper.createEntriesScript(fileName, noOfEntries);
 			
 			/**
-			 * Create searchFile
+			 * Create searchFile with search_fileName
 			 */
 			helper.createSearchScript(search_fileName, noOfEntries,
 					outOfBoundEntries, noOfSearchTerms);
@@ -74,7 +74,8 @@ public class Driver {
 			new SearchWorker(search_fileName, search_threads, results,
 					musicStore);
 
-		} catch (Exception e) {// Catch exception if any
+		} catch (dTunesStoreException e) {
+			// TODO Auto-generated catch block
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
