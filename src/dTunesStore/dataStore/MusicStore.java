@@ -3,6 +3,8 @@ package dTunesStore.dataStore;
 import java.util.Iterator;
 import java.util.Vector;
 
+import dTunesStore.util.dTunesStoreException;
+
 public class MusicStore {
 	
 	/**
@@ -24,15 +26,24 @@ public class MusicStore {
 		/**
 		 * DATA STRUCTURE IMPACT ZONE
 		 */
-		Iterator<MusicInfo> itr = vector.iterator();
-		MusicInfo currentObj;
 		
-		while(itr.hasNext()){
-			currentObj = itr.next();
-			streamOutput("stdout",currentObj);
+		try {
+			
+			if(vector.isEmpty()) throw new dTunesStoreException("DataStructure Exception:", 5);
+			
+			Iterator<MusicInfo> itr = vector.iterator();
+			MusicInfo currentObj;
+			
+			while(itr.hasNext()){
+				currentObj = itr.next();
+				streamOutput("stdout",currentObj);
+			}
+			
+			System.out.println("The size of vector is : " + vector.size());
+		} catch (dTunesStoreException e) {
+			// TODO Auto-generated catch block
+			System.err.println("Error: " + e.getMessage());
 		}
-		
-		System.out.println("The size of vector is : " + vector.size());
 	}
 	
 	/**
