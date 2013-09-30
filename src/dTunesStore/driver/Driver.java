@@ -24,16 +24,11 @@ public class Driver {
 	public static void main(String[] args) throws dTunesStoreException {
 		// TODO Auto-generated method stub
 
-		/***
-		 * Set DEBUG_VALUE
-		 */
-
-		
-
 		try {
 			if(args.length != 5){
 				throw new dTunesStoreException("Arguments Exception:", args.length);
 			}
+			
 			String fileName = args[0] + ".txt";
 			int worker_threads = Integer.parseInt(args[1]);
 			String search_fileName = args[2] + ".txt";
@@ -41,18 +36,33 @@ public class Driver {
 			Debug.set_debug_value(Integer.parseInt(args[4]));
 			
 			Helper helper = Helper.getUniqueInstance();
+			
+			/**
+			 * Script to create the dataFile and searchFile
+			 */
 			int noOfEntries = 100000;
 			int noOfSearchTerms = 50;
 			int outOfBoundEntries = noOfEntries + 50000;
-
+			
+			/**
+			 * Create dataFile
+			 */
 			helper.createEntriesScript(fileName, noOfEntries);
+			
+			/**
+			 * Create searchFile
+			 */
 			helper.createSearchScript(search_fileName, noOfEntries,
 					outOfBoundEntries, noOfSearchTerms);
-			int numberOflines = helper.countLines(fileName);
-			helper.set_file_lines_count(numberOflines);
 
+			/**
+			 * Create an instance for PopulateWorker
+			 */
 			PopulateWorker populateWorker = new PopulateWorker(fileName,
 					worker_threads);
+			/**
+			 * Create threads for PopulateWorker
+			 */
 			MusicStore musicStore = populateWorker.createThreads();
 
 			/***
