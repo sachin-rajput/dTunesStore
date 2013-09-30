@@ -60,7 +60,7 @@ public class MusicInfo {
 
 	/**
 	 * Accessor for duration
-	 * @return
+	 * @return duration
 	 */
 	public double getDuration() {
 		return duration;
