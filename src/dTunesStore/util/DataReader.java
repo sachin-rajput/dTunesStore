@@ -17,25 +17,15 @@ public class DataReader {
 	private String fileName;
 	BufferedReader br = null;
 	Helper helper = new Helper();
-	
-	/***
-	 * Let's create a null DATA STRUCTURE
-	 *  DATA STRUCTURE IMPACT ZONE
-	 * @param fileName
-	 * @param arrayList
-	 */
 	Vector<MusicInfo> vector = new Vector<MusicInfo>();
-	//public List<MusicInfo> vector = new ArrayList<MusicInfo>();
 	public List<MusicInfo> resultList = new ArrayList<MusicInfo>();
-	
 	private MusicInfo currentObj;
-	//MusicStore musicStore = MusicStore.getUniqueInstance();
 	
 	/***
 	 * DATA STRUCTURE IMPACT ZONE in parameter 
-	 * 
-	 * @param fileName
-	 * @param arrayList
+	 * Constructor for DataReader
+	 * @param fileName - name of the data file
+	 * @param vector - data structure to store the data
 	 */
 	public DataReader(String fileName,Vector<MusicInfo> vector){
 		Debug.printDebug(4,"DataReader constructor(String fileName,Vector<MusicInfo> vector) called.");
@@ -47,10 +37,10 @@ public class DataReader {
 	
 	/***
 	 * DATA STRUCTURE IMPACT ZONE in parameter 
-	 * 
-	 * @param fileName
-	 * @param arrayList
-	 * @param dataStoreList
+	 * Constructor for DataReader(for searching)
+	 * @param fileName - name of the file to be searched
+	 * @param resultList - data structure to store the search results
+	 * @param vector - data structure with the data
 	 */
 	public DataReader(String fileName, List<MusicInfo> resultList,Vector<MusicInfo> vector){
 		Debug.printDebug(4,"DataReader constructor(String fileName, List<MusicInfo> resultList,Vector<MusicInfo>) vector called.");
@@ -91,8 +81,8 @@ public class DataReader {
 	/**
 	 * This method will read the file and according the value of mode will either save the content
 	 * of the file to the data structure or will call the searchFile for searching.
-	 * @param currentThreadId
-	 * @param mode
+	 * @param currentThreadId - current thread Id
+	 * @param mode - depending on this value, it will either populate the data structure of search for a term
 	 */
 	public void readFile(int currentThreadId,String mode) {
 		
@@ -125,8 +115,8 @@ public class DataReader {
 	
 	/**
 	 * This method will search for the search term in the data structure and if present will display the result
-	 * @param currentThreadId
-	 * @param DataTosearch
+	 * @param currentThreadId - current thread Id
+	 * @param DataTosearch - search term to be searched
 	 */
 	public synchronized void searchFile(int currentThreadId,String DataTosearch){
 		
