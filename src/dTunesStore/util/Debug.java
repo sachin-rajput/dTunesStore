@@ -11,17 +11,30 @@ public class Debug {
 		return instance;
 	}
 
-	// accessor and mutator for DEBUG_VALUE
-	public static void set_debug_value(int value) {
+	
+	/**
+	 * Setter method(mutator) for DEBUG_VALUE
+	 * @param value
+	 */
+	public static void setDebugValue(int value) {
 		DEBUG_VALUE = value;
 	}
-
-	public static int get_debug_value() {
+	
+	/**
+	 * Getter(accessor) for DEBUG_VALUE
+	 * @return
+	 */
+	public static int getDebugValue() {
 		return DEBUG_VALUE;
 	}
-
-	public static void print_debug(int value, String Message) {
-		if (get_debug_value() == value)
+	
+	/**
+	 * Prints the contents as per the debug value
+	 * @param value
+	 * @param Message
+	 */
+	public static void printDebug(int value, String Message) {
+		if (getDebugValue() == value)
 			System.out.println(Message);
 	}
 }
