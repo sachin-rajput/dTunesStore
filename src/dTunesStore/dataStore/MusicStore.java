@@ -1,43 +1,50 @@
 package dTunesStore.dataStore;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Vector;
-
-import dTunesStore.util.Debug;
 
 public class MusicStore {
 	
+	/**
+	 * Constructor for MusicStore()
+	 */
 	public MusicStore(){
 		//Debug.print_debug(4,"MusicStore constructor called");
 	}
 	
-	
-	//DATA STRUCTURE IMPACT ZONE 
+	/**
+	 * DATA STRUCTURE IMPACT ZONE 
+	 */
 	public Vector<MusicInfo> vector = new Vector<MusicInfo>();
 	
-//	public MusicInfo createStructure(String songName,String albumName,String leadName,String duration){
-//		MusicInfo record = new MusicInfo();
-//		record.setSongName(songName);
-//		record.setLeadName(leadName);
-//		record.setAlbumName(albumName);
-//		record.setDuration(Double.parseDouble(duration));
-//		//arrayList.add(record);
-//		return record;
-//	}
-	
+	/**
+	 * Displays the data from data structure
+	 */
 	public void displayData(){
-		//DATA STRUCTURE IMPACT ZONE entire function
+		/**
+		 * DATA STRUCTURE IMPACT ZONE
+		 */
 		Iterator<MusicInfo> itr = vector.iterator();
 		MusicInfo currentObj;
 		
 		while(itr.hasNext()){
 			currentObj = itr.next();
-			System.out.println(currentObj.getSongName() + " " + currentObj.getAlbumName() + " " + 
-					currentObj.getLeadName() + " " + currentObj.getDuration());
+			streamOutput("stdout",currentObj);
 		}
 		
 		System.out.println("The size of vector is : " + vector.size());
+	}
+	
+	/**
+	 * Prints the data according to the type 
+	 * @param type - how to handle the print
+	 * @param currentObj - object to print
+	 */
+	public void streamOutput(String type,Object currentObj){
+		MusicInfo musicInfo = (MusicInfo)currentObj;
+		if(type == "stdout"){
+			System.out.println(musicInfo.getSongName() + " " + musicInfo.getAlbumName() + " " + 
+					musicInfo.getLeadName() + " " + musicInfo.getDuration());
+		}
 	}
 }
