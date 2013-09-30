@@ -8,15 +8,19 @@ import dTunesStore.dataStore.MusicInfo;
 
 public class Results implements StoreOperationsInterface {
 	
-	
+	/**
+	 * Results constructor
+	 */
 	public Results(){
-		Debug.print_debug(4,"Helper constructor called.");
+		Debug.printDebug(4,"Helper constructor called.");
 	}
 	
 	//DATA STRUCTURE IMPACT ZONE
 	public List<MusicInfo> arrayList = new ArrayList<MusicInfo>();
 	
-	
+	/**
+	 * Displays the search results
+	 */
 	public void displayData(){
 		//DATA STRUCTURE IMPACT ZONE entire function 
 		Iterator<MusicInfo> itr = arrayList.iterator();
@@ -31,6 +35,9 @@ public class Results implements StoreOperationsInterface {
 		System.out.println("The size of array is : " + arrayList.size());
 	}
 	
+	/**
+	 * Helper method for displayData
+	 */
 	public void streamOutput(String type,Object currentObj){
 		MusicInfo musicInfo = (MusicInfo)currentObj;
 		if(type == "stdout"){
