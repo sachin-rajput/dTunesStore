@@ -13,8 +13,11 @@ public class PopulateWorker implements Runnable {
 	private DataReader reader;
 	private MusicStore musicStore;
 
-	// Helper helper = Helper.getUniqueInstance();
-
+	/**
+	 * Constructor for PopulateWorker
+	 * @param file_name - dataStoreFilename
+	 * @param worker_threads - number of threads for populateworker
+	 */
 	public PopulateWorker(String file_name, int worker_threads) {
 		Debug.print_debug(4,"PopulateWorker constructor called.");
 		// DataReader reader = new DataReader(this.filename);
@@ -23,20 +26,16 @@ public class PopulateWorker implements Runnable {
 		//DATA STRUCTURE IMPACT ZONE in parameter
 		this.reader = new DataReader(file_name, this.musicStore.vector);
 	}
-
+	
+	/**
+	 * Creates threads for storing data from file to data structure
+	 * @return MusicStore object filled with data from dataStorefile
+	 */
 	public MusicStore createThreads() {
 		for (int i = 0; i < worker_threads; i++) {
-
-			// new PopulateWorker(threads,file_name,from,to);
 			t = new Thread(this, "Thread Created!");
-			//System.out.println("Child thread: " + t + " with id: " + t.getId());
-			// System.out.println("Thread config: from" + this.from + " to: " +
-			// this.to);
-			// this.thread_no = t.getId();
-
 			t.start();
 			this.threads.add(t);
-
 		}
 
 		for (Thread th : this.threads) {
@@ -52,12 +51,6 @@ public class PopulateWorker implements Runnable {
 		 * Close file after reading
 		 */
 		this.reader.close_file();
-
-		/***
-		 * Lets print the entire DataStructure which we saved
-		 */
-		//System.out.println("---------------------------");
-		//musicStore.displayData();
 		
 		return musicStore;
 	}
@@ -66,16 +59,12 @@ public class PopulateWorker implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 
-		/***
-		 * Read the file
-		 */
 		int currentThreadId = (int) Thread.currentThread().getId();
 		Debug.print_debug(3,"Thread - " + currentThreadId +"'s run method called from PopulateWorker.");
-		//System.out.println("Child thread: " + Thread.currentThread().getId());
 		
+		/**
+		 * Read the file from dataStorefile and save it to datastructure
+		 */
 		this.reader.read_file(currentThreadId,"saveToDS");
-
-		//System.out.println("Exiting Child thread.");
-
 	}
 }
