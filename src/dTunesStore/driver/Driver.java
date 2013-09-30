@@ -33,7 +33,7 @@ public class Driver {
 			int worker_threads = Integer.parseInt(args[1]);
 			String search_fileName = args[2] + ".txt";
 			int search_threads = Integer.parseInt(args[3]);
-			Debug.set_debug_value(Integer.parseInt(args[4]));
+			Debug.setDebugValue(Integer.parseInt(args[4]));
 			
 			Helper helper = new Helper();
 			
