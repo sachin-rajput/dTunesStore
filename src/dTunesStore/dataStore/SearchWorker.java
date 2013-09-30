@@ -22,7 +22,7 @@ public class SearchWorker implements Runnable {
 	 * @param musicStore - object from which we will read the data
 	 */
 	public SearchWorker(String fileName, int searchThreads, Results results,MusicStore musicStore) {
-		Debug.print_debug(4,"SearchWorker constructor called.");
+		Debug.printDebug(4,"SearchWorker constructor called.");
 		this.musicStore = musicStore;
 		this.results = results;
 		
@@ -48,7 +48,7 @@ public class SearchWorker implements Runnable {
 		/***
 		 * Close file after reading
 		 */
-		this.reader.close_file();
+		this.reader.closeFile();
 		
 	}
 
@@ -57,12 +57,12 @@ public class SearchWorker implements Runnable {
 		// TODO Auto-generated method stub
 		
 		int currentThreadId = (int) Thread.currentThread().getId();
-		Debug.print_debug(3,"Thread - " + currentThreadId +"'s run method called from SearchWorker.");
+		Debug.printDebug(3,"Thread - " + currentThreadId +"'s run method called from SearchWorker.");
 		
 		/**
 		 * Read the data from datastructure and search from it and save the found data 
 		 * to result datastructure
 		 */
-		this.reader.read_file(currentThreadId,"search");
+		this.reader.readFile(currentThreadId,"search");
 	}
 }
