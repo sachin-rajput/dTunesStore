@@ -19,7 +19,7 @@ public class PopulateWorker implements Runnable {
 	 * @param worker_threads - number of threads for populateworker
 	 */
 	public PopulateWorker(String file_name, int worker_threads) {
-		Debug.print_debug(4,"PopulateWorker constructor called.");
+		Debug.printDebug(4,"PopulateWorker constructor called.");
 		// DataReader reader = new DataReader(this.filename);
 		this.worker_threads = worker_threads;
 		this.musicStore = new MusicStore();
@@ -50,7 +50,7 @@ public class PopulateWorker implements Runnable {
 		/***
 		 * Close file after reading
 		 */
-		this.reader.close_file();
+		this.reader.closeFile();
 		
 		return musicStore;
 	}
@@ -60,11 +60,11 @@ public class PopulateWorker implements Runnable {
 		// TODO Auto-generated method stub
 
 		int currentThreadId = (int) Thread.currentThread().getId();
-		Debug.print_debug(3,"Thread - " + currentThreadId +"'s run method called from PopulateWorker.");
+		Debug.printDebug(3,"Thread - " + currentThreadId +"'s run method called from PopulateWorker.");
 		
 		/**
 		 * Read the file from dataStorefile and save it to datastructure
 		 */
-		this.reader.read_file(currentThreadId,"saveToDS");
+		this.reader.readFile(currentThreadId,"saveToDS");
 	}
 }
