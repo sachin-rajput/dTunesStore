@@ -90,8 +90,6 @@ public class DataReader {
 			try {
 				while ((sCurrentLine = br.readLine()) != null) {
 					String details[] = sCurrentLine.split(" ");
-					//musicStore.createStructure(songName, albumName, leadName, duration)
-					
 					//DATA STRUCTURE IMPACT ZONE variable vector 
 					
 					if(mode == "saveToDS"){
@@ -99,11 +97,8 @@ public class DataReader {
 					}
 						
 					else if(mode == "search"){
-						//System.out.println("sdd");
 						searchFile(currentThreadId,sCurrentLine);
-						
 					}
-					//System.out.println("Thread id: "+ currentThreadId + " - " +sCurrentLine);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
